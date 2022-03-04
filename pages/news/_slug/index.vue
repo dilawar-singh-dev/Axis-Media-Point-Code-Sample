@@ -31,7 +31,7 @@ export default {
   },
   mounted() {
     this.newsSlug = this.$route.params.slug
-    this.$store.dispatch('getNews')
+    // this.$store.dispatch('getNews')
   },
 }
 </script>

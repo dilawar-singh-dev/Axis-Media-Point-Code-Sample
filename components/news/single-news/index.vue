@@ -97,7 +97,7 @@ export default {
     }
   },
   watch: {
-    '$store.state.news'() {
+    '$store.state.getSingleNews'() {
       this.getNews()
     },
     newsSlug() {
@@ -110,21 +110,21 @@ export default {
     },
   },
   mounted() {
-    if (this.$store.state.news) {
       this.getNews()
       this.scrollToHeading()
-    }
   },
   methods: {
     getNews() {
-      const newsData = this.$store.state.news.filter(
-        (data) => data.slug === this.newsSlug
-      )
-      this.news = newsData[0]
-      if(newsData[0]){
-        this.newsTitle = this.news.title
-        this.scrollToHeading()
+      this.$store.dispatch('getSingleNews',this.$props.newsSlug)
+      if(this.$store.state.singleNews){
+        this.news = this.$store.state.singleNews
+        console.log('this.newsthis.news',this.news)
+        if(this.news){
+          this.newsTitle = this.news.title
+          this.scrollToHeading()
+        }
       }
+      
     },
     scrollToHeading(){
       setTimeout(function () {
